@@ -13,6 +13,10 @@ def init_db():
     with open('schema.sql','r', encoding='utf-8') as f:
         cur.executescript(f.read())
     
+
+
+app.register_blueprint(blogpost_bp)
+
 @app.route("/")
 def index():
     db = sqlite3.connect("instance/posts.sqlite")
@@ -23,9 +27,6 @@ def index():
     rlist = result.fetchall()
     return render_template('index.html',result = rlist)
 
-@app.route("/blogpost")
-def blogpost():
-    return render_template('blog-post-template.html')
 
 @app.route("/bloglist")
 def bloglist():
@@ -41,4 +42,3 @@ def bloglist():
 def about():
     return render_template('about.html')
 
-app.register_blueprint(blogpost_bp)
