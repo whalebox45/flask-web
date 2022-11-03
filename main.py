@@ -1,7 +1,7 @@
 
 import db
 
-from flask import Flask, render_template
+from flask import Flask, render_template, jsonify
 from flask_paginate import Pagination, get_page_args
 from blogpost import blogpost_bp
 import os
@@ -68,3 +68,8 @@ def bloglist(page):
 @app.route("/about")
 def about():
     return render_template('about.html')
+
+
+@app.route("/api_test")
+def api_test():
+    return jsonify({'api_test':'hello'})
