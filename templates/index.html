@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+
+
+{% block navbar_nav %}
+<ul class="navbar-nav flex-column text-left">
+	<li class="nav-item active">
+		<a class="nav-link" href="{{url_for('index')}}"><i class="fas fa-home fa-fw mr-2"></i>Blog Home
+			<span class="sr-only">(current)</span></a>
+	</li>
+	<li class="nav-item">
+		<a class="nav-link" href="{{url_for('bloglist')}}"><i class="fas fa-bookmark fa-fw mr-2"></i>Blog
+			Post</a>
+	</li>
+	<li class="nav-item">
+		<a class="nav-link" href="{{url_for('about')}}"><i class="fas fa-user fa-fw mr-2"></i>About
+			Me</a>
+	</li>
+</ul>
+{% endblock navbar_nav %}
+{% block content %}
+<div class="main-wrapper">
+	<section class="cta-section theme-bg-light py-5">
+		<div class="container text-center">
+			<h2 class="heading">DevBlog - A Blog Template Made For Developers</h2>
+			<div class="intro">Welcome to my blog.</div>
+		</div>
+		<!--//container-->
+	</section>
+	<section class="blog-list px-3 py-5 p-md-5">
+		<div class="container">
+			<div class="item mb-5">
+				<div class="media">
+					<div class="media-body">
+						{% for i in result %}
+						<h3 class="title mb-1"><a href="{{url_for('blogpost_bp.blog_post',id=i[3])}}">{{i[0]}}</a></h3>
+						<div class="meta mb-1"><span class="date">{{i[1]}}</span></div>
+						<div class="intro">{{i[2]}}</div>
+						<a class="more-link" href="{{url_for('blogpost_bp.blog_post',id=i[3])}}">Read more &rarr;</a>
+						<hr />
+						{% endfor %}
+					</div>
+					<!--//media-body-->
+				</div>
+				<!--//media-->
+			</div>
+			<!--//item-->
+
+			<nav class="blog-nav nav nav-justified my-5">
+				<a class="nav-link-next nav-item nav-link rounded" href="{{url_for('bloglist')}}">More<i
+						class="arrow-next fas fa-long-arrow-alt-right"></i></a>
+			</nav>
+
+		</div>
+	</section>
+
+	<footer class="footer text-center py-2 theme-bg-dark">
+
+		<!--/* This template is released under the Creative Commons Attribution 3.0 License. Please keep the attribution link below when using for your own project. Thank you for your support. :) If you'd like to use the template without the attribution, you can buy the commercial license via our website: themes.3rdwavemedia.com */-->
+		<small class="copyright">Designed with <i class="fas fa-heart" style="color: #fb866a;"></i> by <a
+				href="http://themes.3rdwavemedia.com" target="_blank">Xiaoying Riley</a> for developers</small>
+
+	</footer>
+
+</div>
+<!--//main-wrapper-->
+{% endblock content %}
