@@ -25,7 +25,7 @@ app.register_blueprint(blogpost_bp)
 def index():
     dba = db.get_db()
     result = dba.execute(f"SELECT title, created, body, id FROM post\
-        ORDER BY created DESC LIMIT {PAGE_LIMIT}")
+        ORDER BY id DESC, created DESC LIMIT {PAGE_LIMIT}")
     rlist = result.fetchall()
     return render_template('index.html', result=rlist)
 
@@ -45,11 +45,11 @@ def bloglist(page):
 
     if per_page:
         sql = """select title, created, body, id FROM post 
-        ORDER BY created DESC LIMIT {} OFFSET {}""".format(per_page, offset)
+        ORDER BY id DESC, created DESC LIMIT {} OFFSET {}""".format(per_page, offset)
     else:
         sql = """
         SELECT title, created, body, id FROM post
-        ORDER BY created DESC"""
+        ORDER BY id DESC, created DESC"""
 
     result = dba.execute(sql)
     rlist = result.fetchall()
